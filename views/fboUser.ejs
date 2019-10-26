@@ -4,4 +4,58 @@
 <h1 class="heading mb-0"><a href="/" class="heading-link">CHEMICAL X</a></h1>
 
 
+<ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#newReq" role="tab">New Request</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"  data-toggle="tab" href="#Req" role="tab">Pending Requests</a>
+    </li>
+    
+    <li class="nav-item">
+      <a href="/logout">
+        <a class="nav-link" href="/logout" role="link">Logout</a>
+      </a>
+    </li>
+  </ul>
+
+  <div class="formWrapper">
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="newReq" role="tabpanel">
+
+        <%- include('partials/newRequest') %>
+
+      </div>
+      <div class="tab-pane fade" id="Req" role="tabpanel">
+
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Assigned Factory</th>
+                  <th scope="col">Date of Request</th>
+                  <th scope="col">Date of Pickup</th>
+                  <th scope="col">Oil Quantity</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                  <% for(let i=0;i<requests.length;i++){ %>
+                      <tr>
+                          <td><%= requests[i].assignedFactoryName %></td>
+                          <td><%= requests[i].dateOfRequest %></td>
+                          <td><%= requests[i].dateOfPickup %></td>
+                          <td><%= requests[i].oilQuantity %></td>
+                          <td> <%= requests[i].status %></td>
+                      </tr>
+                  <% } %>
+
+                
+        
+              </tbody>
+            </table>
+
+      </div>
+    </div>
+</div>
 <%- include('partials/footer',{pageJS:"/js/fboUser.js"})%>
