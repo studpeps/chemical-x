@@ -1,0 +1,125 @@
+#title
+{
+  background-color: #220a37;
+}
+
+h1{
+  color:white;
+}
+.container-fluid{
+  padding: 3% 15%;
+}
+
+
+.nav-link{
+  margin-right: 18px
+}
+
+#hell{
+  font-size: 1.5rem;
+  font-family: Montserrat;
+  font-weight: bold;
+}
+
+#xyz{
+  color: #8f8f8f;
+  margin-top: 5%;
+  padding: 0 5%;
+  text-align: : center;
+}
+
+.col-lg-4{
+  padding: 0% 2%;
+  margin-bottom: 7%;
+  margin-top: 7%;
+}
+
+.fab:hover{
+  color:#4B0082;
+}
+
+.fa:hover{
+  color:#4B0082;
+}
+
+#features{
+	position: relative;
+	z-index: 1;
+	margin-top: -290px;
+	background-color: white;
+}
+#testimonials{
+  background-color: #220a37;
+  color:#ffffff;
+  text-align: center;
+  padding-bottom: 20%;
+
+}
+
+#carouselExampleControls{
+  /* padding:5% 15%; */
+  height: 25rem;
+  padding-top:5%;
+}
+
+h2{
+  font-weight: bold;
+  font-size: 3em;
+  line-height: 1.5em;
+}
+
+.testimonial-image{
+  border-radius: 100%;
+  width: 10em;
+  height:10em;
+}
+
+#press{
+  background-color:#220a37;
+  text-align: center;
+}
+.press-image{
+  width:10%;
+  margin:0% 3% 3% 0%;;
+}
+
+#pricing{
+  padding:5% 10%;
+  text-align: center;
+}
+
+#cta{
+	background-color:#220a37;
+	padding: 10% 15%;
+	text-align:center;
+}
+
+.cta-stat{
+	font-family:Montserrat;
+	font-size:3em;
+	color:white;
+
+}
+
+#footer{
+	height:200px;
+	text-align:center;
+	padding: 5% 15%;
+}
+
+.social{
+	margin:0 1%;
+}
+
+#iphone{
+  transform: scale(0.8);
+}
+@media (max-width:991px)
+{
+	#iphone{
+  transform: scale(0.8);
+	}
+	#title{
+		text-align:center;
+	}
+}

@@ -1,0 +1,29 @@
+<form action="/newReq" method="post" class="requestForm mt-2" onsubmit="return valid()">
+    <!-- OIL AMOUNT -->
+    <!-- DATE -->
+    <div class="container-fluid">
+        <div class="row mt-2">
+            <div class="col">
+                    <input type="number" class="form-control" name="oilAmount" placeholder="Amount of oil (in litre)">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-muted text-left mb-2 pl-4 mt-1">
+                (min:50)
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-3 text-left pl-3">Date of pickup:
+            </div>
+            <div class="col">
+                    <input type="date" class="form-control" name="dateOfPickup">
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col text-right">
+                <input type="submit" class="btn btn-info">
+            </div>
+        </div>
+    </div>
+    
+</form>

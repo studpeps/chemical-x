@@ -1,0 +1,114 @@
+require('dotenv').config();
+const express = require("express");
+const bodyParser = require("body-parser");
+const ejs = require("ejs");
+const request = require("request");
+const mongoose = require("mongoose");
+const passport = require("passport");
+const session = require("express-session");
+const passportLocalMongoose = require("passport-local-mongoose");
+const _ = require("lodash");
+
+const OIL_RATE_PER_LITRE = 10;
+
+const app = express();
+
+
+app.set("view engine","ejs");
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.static(__dirname+'/public'));
+app.use(session({   //session to start with these settings
+    secret:process.env.SECRET_STRING, //used to encrypt session variables
+    resave:false,
+    saveUninitialized: false,
+    cookie : {
+        maxAge: 1000* 60 * 60 *24 * 365
+    } //stores cookie for one year
+}));
+
+app.use(passport.initialize()); //initializes passport
+app.use(passport.session());    //begins session
+
+
+mongoose.set('useNewUrlParser', true); //remove deprecation warning
+mongoose.set('useFindAndModify', false); //remove deprecation warning
+mongoose.set('useCreateIndex', true); //remove deprecation warning
+mongoose.set('useUnifiedTopology', true); //remove deprecation warning
+mongoose.connect("mongodb://localhost:27017/chemicalx"); //connects to mongodb
+
+const userSchema =new mongoose.Schema({
+    fboNumber : String,
+    mobNumber : String,
+    addr1: String,
+    addr2: String,
+    pincode: String,
+    username : String,
+    requests : [{
+        oilAmount : Number,
+        dateOfPickup : Date,
+        dateOfRequest:Date,
+        assignedFactory : String,
+        assignedFactoryName: String,
+        status : String
+    }]
+});
+
+
+const factorySchema = new mongoose.Schema({
+    username:String,
+    password:String,
+    coordinates:{
+        latitude: String,
+        longitude: String
+    },
+    name : String,
+    addr: String,
+    pinCode:String,
+    
+});
+
+const requestSchema = new mongoose.Schema({
+        dateOfPickup: Date,
+        dateOfRequest:Date,
+        oilQuantity: Number,
+        oilCost: Number,
+        addr1: String,
+        addr2: String,
+        pinCode:String,
+        username:String,
+        mobNo:String,
+        fboNumber:String,
+        status:String,
+        assignedFactory : String,
+        assignedFactoryName: String,
+        deliverySuccessful: Boolean,
+        expired: Boolean
+})
+
+userSchema.plugin(passportLocalMongoose);
+
+const User = mongoose.model("userAccount", userSchema);
+const Factory = mongoose.model('factory',factorySchema);
+const Request = mongoose.model('request',requestSchema);
+
+passport.use(User.createStrategy());
+
+passport.serializeUser(function(user, done) { //sets user id as cookie in browser
+    done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) { //gets id from cookie and then user is fetched from database
+    User.findById(id, function(err, user) {
+        done(err, user);
+    });
+});
+
+
+app.get("/",(req,res)=>{
+    res.render("index");
+});
+
+
+app.listen(3000, ()=>{
+    console.log("Server running at port 3000");
+})

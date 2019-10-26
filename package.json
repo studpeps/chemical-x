@@ -1,0 +1,32 @@
+{
+  "name": "chemical-x",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.7.7",
+    "passport": "^0.4.0",
+    "passport-local-mongoose": "^5.0.1",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/studpeps/chemical-x.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/studpeps/chemical-x/issues"
+  },
+  "homepage": "https://github.com/studpeps/chemical-x#readme"
+}

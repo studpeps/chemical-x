@@ -1,0 +1,27 @@
+
+h1{
+    font-family: 'Aladin', cursive;
+    font-size: 3rem;
+}
+
+.heading{
+    text-align: right;
+    padding:3%;
+    padding-right: 7%;
+    color:white;
+    background: #220a37;
+}
+
+.heading-link, .heading-link:hover{
+    color:white;
+    text-decoration: none;
+}
+
+@media (max-width:576px){
+    
+    .heading{
+        font-size: 3rem;
+        text-align: center;
+    }
+    
+}
