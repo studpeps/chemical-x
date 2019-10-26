@@ -108,6 +108,9 @@ app.get("/",(req,res)=>{
     res.render("index");
 });
 
+app.get("/login",(req,res)=>{
+    res.render("login",{admin:false});
+});
 
 app.get("/signup",(req,res)=>{
     res.render("signUp");
@@ -118,6 +121,28 @@ app.get("/logout",(req,res)=>{
     res.redirect('/');
 });
 
+
+app.get("/user",(req,res)=>{
+    if(req.isAuthenticated()){
+        Request.find({username:req.user.username},(err,requests)=>{
+            if(err){
+                console.log(err);
+            }else{
+                console.log(requests);
+                res.render("fboUser",{requests:requests});
+            }
+        })
+        
+    }else{
+        res.redirect("/");
+    }
+});
+
+
+app.get("/logout",(req,res)=>{
+    req.logout();
+    res.redirect('/');
+});
 
 app.post("/signup",(req,res)=>{
     console.log(req.body);
@@ -144,6 +169,12 @@ app.post("/signup",(req,res)=>{
         }
     });
 });
+
+app.post("/login",(req,res)=>{
+    passport.authenticate('local')(req,res,()=>{
+        res.redirect(`/user/?userID=${req.user._id}`);
+    });
+})
 
 app.listen(3000, ()=>{
     console.log("Server running at port 3000");

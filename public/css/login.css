@@ -1,0 +1,60 @@
+
+.login{
+    text-align:center;
+    margin:5%;
+    width:50%;
+}
+
+.sign-in-heading{
+    text-align: left;
+}
+
+.form-wrapper{
+    text-align: center;
+}
+
+input[type="email"]{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+input[type="password"]{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.button{
+    text-align: left;
+    color: white;
+}
+
+.col-8{
+    text-align: right;
+    font-size: 0.8rem;
+}
+
+@media (max-width:768px){
+    .row:last-child >.col-md-6:first-child{
+        border-width: 0.1rem;
+        border-right-style: none;
+        border-bottom-color:lightgray;
+        border-bottom-style: solid;
+    }
+    .button{
+        margin-top:10%;
+    }
+
+}
+
+@media (max-width:576px){
+
+    .welcome-message{
+        font-size:1.5rem;
+    }
+
+    .login{
+        margin-top:20%;
+    }
+    
+    
+}
