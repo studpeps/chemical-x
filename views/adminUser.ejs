@@ -3,4 +3,148 @@
 <link rel="stylesheet" href="/css/heading.css">
 <h1 class="heading mb-0"><a href="/" class="heading-link">CHEMICAL X</a></h1>
 
+
+<ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+    <li class="nav-item nav-link">
+        <%= factory.name %>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#pendingReq" role="tab" aria-controls="home" aria-selected="true">Pending requests</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"  data-toggle="tab" href="#activeReq" role="tab" aria-controls="profile" aria-selected="false">Active requests</a>
+    </li>
+    <li class="nav-item">
+            <a class="nav-link"  data-toggle="tab" href="#pastReq" role="tab" aria-controls="profile" aria-selected="false">Past requests</a>
+    </li>
+    <li class="nav-item">
+      <a href="/logout">
+        <a class="nav-link" href="/admin" role="link" aria-controls="contact" aria-selected="false">Logout</a>
+      </a>
+    </li>
+  </ul>
+
+  <div class="formWrapper">
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="pendingReq" role="tabpanel">
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Date of Pickup</th>
+                  <th scope="col">Oil Quantity</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Update Status</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                  <% for(let i=0;i<requests.length;i++){%>
+                      <% if(requests[i].status == 'Pending Approval'){ %>
+                        <tr>
+                            <td><%= requests[i].dateOfPickup %></td>
+                            <td><%= requests[i].oilQuantity %></td>
+                            <td><%= requests[i].addr1 %> <%= requests[i].addr2 %></td>
+                            <td>
+                              <form method="POST">
+                                  <input type="hidden" value="<%= requests[i]._id %>" name="requestId">
+                                  <input type="hidden" value="<%= requests[i].assignedFactory %>" name="factoryId">
+                                  <input type="submit" class="img-accept mx-2" value="" formaction="/acceptrequest">
+                                  <input type="submit" class="img-reject mx-2" value="" formaction="/rejectrequest">
+                              </form> 
+                            </td>
+                        </tr>
+                      <% } %>
+                      
+                  <% } %>
+
+                
+        
+              </tbody>
+            </table>
+        
+
+      </div>
+      <div class="tab-pane fade" id="activeReq" role="tabpanel">
+        <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Date of Pickup</th>
+                  <th scope="col">Oil Quantity</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Update Status</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                  <% for(let i=0;i<requests.length;i++){%>
+                      <% if(requests[i].status == 'Accepted' && !requests[i].expired){ %>
+                        <tr>
+                            <td><%= requests[i].dateOfPickup %></td>
+                            <td><%= requests[i].oilQuantity %></td>
+                            <td><%= requests[i].addr1 %> <%= requests[i].addr2 %></td>
+                            <td>
+                              <form method="POST">
+                                  <input type="hidden" value="<%= requests[i]._id %>" name="requestId">
+                                  <input type="hidden" value="<%= requests[i].assignedFactory %>" name="factoryId">
+                                  <input type="submit" class="btn btn-primary mx-2" value="Picked Up" formaction="/pickedUp">
+                                  <input type="submit" class="btn btn-outline-danger mx-2" value="Not Picked Up" formaction="/notPickedUp">
+                              </form> 
+                            </td>
+                        </tr>
+                      <% } %>
+                      
+                  <% } %>
+
+                
+        
+              </tbody>
+            </table>
+      </div>
+      <div class="tab-pane fade" id="pastReq" role="tabpanel">
+
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Date of Pickup</th>
+                  <th scope="col">Oil Quantity</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                  <% for(let i=0;i<requests.length;i++){%>
+                      <% if(requests[i].expired){ %>
+                        <tr>
+                            <td><%= requests[i].dateOfPickup %></td>
+                            <td><%= requests[i].oilQuantity %></td>
+                            <td><%= requests[i].addr1 %> <%= requests[i].addr2 %></td>
+                            <td><%= requests[i].status %>
+                            </td>
+                        </tr>
+                      <% } %>
+                      
+                  <% } %>
+
+                
+        
+              </tbody>
+            </table>
+
+      </div>
+    </div>
+</div>
+
+<footer class="lead py-3">
+
+  <% let sum=0; %>
+  <% for(let i=0;i<requests.length;i++){  %>
+
+    <% if(requests[i].status == 'Pick up successful'){ %>
+      <% sum+=requests[i].oilQuantity; %>
+    <% } %>
+  <% } %>
+
+  Total oil collected : <%= sum %> L
+</footer>
 <%- include('partials/footer',{pageJS:""})%>
