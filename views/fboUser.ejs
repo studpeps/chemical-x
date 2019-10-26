@@ -9,7 +9,7 @@
       <a class="nav-link active" data-toggle="tab" href="#newReq" role="tab">New Request</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link"  data-toggle="tab" href="#Req" role="tab">Pending Requests</a>
+      <a class="nav-link"  data-toggle="tab" href="#Req" role="tab">Past Requests</a>
     </li>
     
     <li class="nav-item">
@@ -35,6 +35,7 @@
                   <th scope="col">Date of Request</th>
                   <th scope="col">Date of Pickup</th>
                   <th scope="col">Oil Quantity</th>
+                  <th scope="col">Estimated Amount</th>
                   <th scope="col">Status</th>
                 </tr>
               </thead>
@@ -46,6 +47,7 @@
                           <td><%= requests[i].dateOfRequest %></td>
                           <td><%= requests[i].dateOfPickup %></td>
                           <td><%= requests[i].oilQuantity %></td>
+                          <td><%= requests[i].fboOilCost %></td>
                           <td> <%= requests[i].status %></td>
                       </tr>
                   <% } %>
