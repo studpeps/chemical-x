@@ -103,6 +103,10 @@ passport.deserializeUser(function(id, done) { //gets id from cookie and then use
     });
 });
 
+//-------------------------
+//------GET REQUESTS------
+//-------------------------
+
 
 app.get("/",(req,res)=>{
     res.render("index");
@@ -144,6 +148,33 @@ app.get("/logout",(req,res)=>{
     res.redirect('/');
 });
 
+
+app.get("/admin",(req,res)=>{
+    res.render("login",{admin:true});
+})
+
+
+app.get('/admin/user',(req,res)=>{
+    Request.find({assignedFactory:req.query.userID},(err,requests)=>{
+        if(err){
+            console.log(err);
+        }else{
+            Factory.findById(req.query.userID,(err,factory)=>{
+                if(err){
+                    console.log(err)
+                }else{
+                    res.render('adminUser',{requests:requests,factory:factory});
+                }
+            })
+        }
+    })
+    
+    
+})
+
+//-------------------------
+//------POST REQUESTS------
+//-------------------------
 app.post("/signup",(req,res)=>{
     console.log(req.body);
     const newUser = {
@@ -174,6 +205,24 @@ app.post("/login",(req,res)=>{
     passport.authenticate('local')(req,res,()=>{
         res.redirect(`/user/?userID=${req.user._id}`);
     });
+})
+
+app.post('/admin',(req,res)=>{
+    Factory.findOne({username:req.body.username},(err,user)=>{
+        if(err){
+            console.log(err);
+        }else{
+            if(user){
+                if(user.password == req.body.password){
+                    res.redirect(`/admin/user/?userID=${user._id}`);
+                }else{
+                    res.redirect("/admin");
+                }
+            }else{
+                res.redirect("/admin");
+            }
+        }
+    })
 })
 
 app.listen(3000, ()=>{
