@@ -1,0 +1,92 @@
+<%- include('partials/header', {title:'Chemical X', pageCSS:"css/signUp.css"}) %>
+
+<link rel="stylesheet" href="css/heading.css">
+<h1 class="heading"><a href="/" class="heading-link">CHEMICAL X</a></h1>
+
+<div class="content mx-auto">
+    <br />
+    <p class="lead text-center px-3">Join in with us, we can make this Earth a better place to live !</p>
+    <div class="container-fluid">
+        <form action="/signup" method="post" onsubmit="return valid()">
+
+            <div class="row mt-2">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Food Business Operator Number" name="fboNumber" required>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col">
+                    <input type="email" class="form-control" placeholder="Email Address" name="username" required>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col">
+                    <input type="tel" class="form-control" placeholder="Phone no" name="phoneNo" required>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Address Line 1" name="addr1" required>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Address Line 2" name="addr2" >
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col">
+                    <input type="tel" class="form-control" placeholder="PIN Code" name="pinCode" required>
+
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col">
+                    <input type="password" class="form-control" placeholder="Password" name="password" required>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col">
+                    <input type="password" class="form-control" placeholder="Confirm Password" name="checkPassword" required>
+                </div>
+            </div>
+
+            <div class="row mt-2 passwordWarning">
+                <div class="col">
+                    Passwords don't match
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                    <div class="col">
+                            <a href="/" role="button" class="btn btn-outline-danger btn-block">Go back</a>
+                        </div>
+                    <div class="col">
+                        <input type="submit" class="btn btn-info btn-block" value="Proceed">
+                    </div>
+                </div>
+        </form>
+
+    </div>
+</div>
+
+
+<!-- Footer -->
+
+<footer id="footer" class="text-center pt-5">
+  <i class="fab fa-twitter social"></i>
+  <i class="fab fa-facebook social"></i>
+  <i class="fab fa-instagram social"></i>
+  <i class="fa fa-envelope social"></i>
+  <br>
+  <p style="margin-top:1%;">Made with 💖 by Powerpuff Girls.</p>
+
+</footer>
+
+<%- include('partials/footer',{pageJS:"js/signUp.js"})%>

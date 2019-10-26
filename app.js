@@ -109,6 +109,42 @@ app.get("/",(req,res)=>{
 });
 
 
+app.get("/signup",(req,res)=>{
+    res.render("signUp");
+});
+
+app.get("/logout",(req,res)=>{
+    req.logout();
+    res.redirect('/');
+});
+
+
+app.post("/signup",(req,res)=>{
+    console.log(req.body);
+    const newUser = {
+        fboNumber : req.body.fboNumber,
+        mobNumber : req.body.phoneNo,
+        addr1: req.body.addr1,
+        addr2: req.body.addr2,
+        pincode: req.body.pinCode,
+        username : req.body.username,
+        password: req.body.password
+    }
+
+    const password = req.body.password;
+
+    User.register(newUser, password , (err,user)=>{
+        if(err){
+            console.log(err);
+            res.redirect("/signup");
+        }else{
+            passport.authenticate("local")(req,res,()=>{
+                res.redirect("/");
+            });
+        }
+    });
+});
+
 app.listen(3000, ()=>{
     console.log("Server running at port 3000");
 })
