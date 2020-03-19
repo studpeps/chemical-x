@@ -6,6 +6,6 @@ these raw materials. FBOs will be willing to be a part of this as they'll be get
 And, the biodiesel industries will be willing to be a part of this as well as they will be getting their raw materials for a 
 much cheaper price than what is industry-standard.
 
-This made using:
+Made using:
 Front-end:HTML,CSS,JavaScript
 Back-end:MongoDB
